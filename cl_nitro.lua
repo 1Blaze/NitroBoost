@@ -55,7 +55,7 @@ AddEventHandler("SpawningNitro", function()
             FreezeEntityPosition(pid, false)
             NitroCooldown = 15
             CreateVehicle(vehiclehash, x, y, z, GetEntityHeading(PlayerPedId())+90, 1, 0)
-            ShowNotification("~g~ Spawned - Thanks for boosting FRG!")
+            ShowNotification("~g~ Spawned - Thanks for boosting!")
         end)
     else
         ShowNotification("~r~Stop Spamming!!!")
