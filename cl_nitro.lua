@@ -7,11 +7,14 @@ function ShowNotification( text )
 end
 
 RegisterCommand("nitro", function()
-    if IsPedInAnyVehicle(PlayerPedId(), true) then
-        ShowNotification("~r~You can't be in a vehicle!")
+    if NitroCooldown == 0 then
+        if IsPedInAnyVehicle(PlayerPedId(), true) then
+            ShowNotification("~r~You can't be in a vehicle!")
+        else
+            TriggerServerEvent("CheckNitro")
+        end
     else
-        TriggerServerEvent("CheckNitro")
-    end
+        ShowNotification("~r~ Stop Spamming please!")
 end)
 
 RegisterNetEvent("NotBoosing")
@@ -35,6 +38,7 @@ AddEventHandler("SpawningNitro", function()
         local x,y,z = table.unpack(GetOffsetFromEntityInWorldCoords(PlayerPedId(), 0.0, 8.0, 0.5))
         local veh = bmx
         if veh == nil then veh = "bmx" end
+        NitroCooldown = 15
         vehiclehash = GetHashKey(veh)
         RequestModel(vehiclehash)
         
@@ -53,7 +57,6 @@ AddEventHandler("SpawningNitro", function()
             Citizen.Wait(6000)
             ClearPedTasks(pid)
             FreezeEntityPosition(pid, false)
-            NitroCooldown = 15
             CreateVehicle(vehiclehash, x, y, z, GetEntityHeading(PlayerPedId())+90, 1, 0)
             ShowNotification("~g~ Spawned - Thanks for boosting!")
         end)
