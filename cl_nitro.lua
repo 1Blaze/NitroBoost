@@ -15,6 +15,7 @@ RegisterCommand("nitro", function()
         end
     else
         ShowNotification("~r~ Stop Spamming please!")
+    end
 end)
 
 RegisterNetEvent("NotBoosing")
